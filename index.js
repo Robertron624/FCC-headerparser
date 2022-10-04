@@ -26,14 +26,14 @@ app.get('/api/hello', function (req, res) {
 
 // return ip, prefered language
 app.get('/api/whoami', (req, res) => {
-  const userIp = req.ip
-
-  console.log(language)
+  const userIp = req.socket.remoteAddress
+  const language = req.get('Accept-Language')
+  const software = req.header('user-agent')
 
   const responseObject = {
     "ipaddress": userIp,
-    "language": "es",
-    "software": "Windows"
+    "language": language,
+    "software": software
   }
 
   res.send(responseObject)
